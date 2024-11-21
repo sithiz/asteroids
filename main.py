@@ -29,16 +29,22 @@ def main() :
     asteroid_field = AsteroidField()                    
 
     player = Player(x,y)
-
+    
     dt = 0
 
     while True :
         for item in updatable :
             item.update(dt)
-        for item in asteroids:
-            if item.collisions(player):
+        for asteroid in asteroids:
+            if asteroid.collisions(player):
                 print("Game Over!")
                 raise SystemExit
+            for shot in shoot:
+                if asteroid.collisions(shot):
+                    shot.kill()
+                    asteroid.split()
+
+
         screen.fill("black")
         for item in drawable:
             item.draw(screen)
