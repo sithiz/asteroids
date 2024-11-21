@@ -33,6 +33,10 @@ def main() :
     while True :
         for item in updatable :
             item.update(dt)
+        for item in asteroids:
+            if item.collisions(player):
+                print("Game Over!")
+                raise SystemExit
         screen.fill("black")
         for item in drawable:
             item.draw(screen)
